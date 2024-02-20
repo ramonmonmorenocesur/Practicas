@@ -1,6 +1,4 @@
-esto es una prueba de escritura en ficheroesto es una prueba de escritura en fichero
-hola
-hola
-quiero
-irme
-ya
+primera linea
+segunda linea
+tercera linea
+cuarta linea
