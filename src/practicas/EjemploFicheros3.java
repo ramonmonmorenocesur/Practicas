@@ -2,49 +2,53 @@ package practicas;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import Animales.Animal;
 
 public class EjemploFicheros3 {
-	public static void main (String args[]) throws IOException {
-		//flujo de salida de salida de datos 
-		DataOutputStream salida=null;
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		Animal gato;
+		Animal perro;
+		perro = new Animal("perro",32);
+		gato= new Animal("gato",30);
+		ObjectOutputStream salida = null;
 		try {
-			salida= new DataOutputStream(new BufferedOutputStream(new FileOutputStream("FicheroGenerico.txt")));
-			salida.writeChar('a');
-			salida.writeBoolean(true);
-			salida.writeUTF("frase en UTF");
-			
-			
-			
-			
+			salida = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("FicheroObjetos.txt")));
+			salida.writeObject(perro);
+			salida.writeObject(gato);
 		} catch (FileNotFoundException e) {
+
 			System.out.println(e.getMessage());
-		}finally {
-			if (salida!=null) {
+
+		} finally {
+			if (salida != null) {
 				salida.close();
 			}
 		}
-		DataInputStream entrada=null;
+		ObjectInputStream entrada=null;
+		Animal generico;
+		
+		
 		try {
-			entrada= new DataInputStream(new BufferedInputStream(new FileInputStream("FicheroGenerico.txt")));
-			
-			
-			System.out.println(entrada.readChar());
-			System.out.println(entrada.readBoolean());
-			System.out.println(entrada.readUTF());
+			entrada= new ObjectInputStream(new BufferedInputStream(new FileInputStream("FicheroObjetos.txt")));
+			generico=(Animal)entrada.readObject();
+			System.out.println(generico.getNombre());
 			
 			
 		} catch (FileNotFoundException e) {
-			System.out.println(e.getMessage());		}
+		System.out.println(e.getMessage());
 		
-		
-		
-		
-		
+		}finally {
+			if (entrada!=null) {
+				entrada.close();
+			}
+		}
+
 	}
 }

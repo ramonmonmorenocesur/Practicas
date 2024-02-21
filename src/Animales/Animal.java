@@ -1,6 +1,6 @@
 package Animales;
-
-public class Animal {
+import java.io.Serializable;
+public class Animal implements Serializable {
 
 	public Animal(String nombre, int tpVida) {
 		super();
