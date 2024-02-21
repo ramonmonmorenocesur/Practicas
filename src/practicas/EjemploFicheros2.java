@@ -1,79 +1,50 @@
 package practicas;
-import java.util.Scanner;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class EjemploFicheros2 {
 
-	
-	public static void main (String args[]) throws IOException {
-		//pedir cuantas lineas quieres imprimir y que imprima ese numero de lineas
-	//leer el fichero 
-		char caracter;
-		FileReader entrada=null;
-		
+	public static void main(String[] args) throws IOException {
+
+		BufferedReader entrada = null;
+		BufferedWriter salida2 = null;
+		FileReader entradaFichero = null;
+		PrintWriter salida = null;
+		entrada = new BufferedReader(entradaFichero);
 		try {
-			entrada= new FileReader("PruebaFichero.txt");
-			System.out.println();
-			caracter=(char)entrada.read();
-			while(caracter!=(char)-1) {
-				
-				System.out.print(caracter);
-				caracter=(char)entrada.read();
-				
+			entradaFichero = new FileReader("PruebaFichero.txt");
+			entrada = new BufferedReader(entradaFichero);
+			salida = new PrintWriter(new FileWriter("FicheroCopia.txt"));
+			salida2 = new BufferedWriter(new FileWriter("CopiaFichero.txt"));
+			String linea;
+			int numLinea = 3;
+			while(numLinea>0) {
+				linea= entrada.readLine();
+				salida.println(linea);
+				salida2.write(linea);
 			}
-			
-			
-			
-			
-			
-	
-			
-			
 		} catch (FileNotFoundException e) {
-		
+
 			System.out.println(e.getMessage());
-		}finally {
-			if(entrada!=null) {
+		} finally {
+			if (entrada != null) {
 				entrada.close();
 			}
-		}   
-		
-		
-		
-		int numLineas;
-		Scanner teclado = new Scanner(System.in);
-		entrada=null;
-		try {
-			entrada= new FileReader("PruebaFichero.txt");
-			System.out.println("cuantas lineas desea leer");
-			numLineas=teclado.nextInt();
-			caracter=(char)entrada.read();
-			while( numLineas  > 0 &&caracter!=(char)-1) {
-				
-				if(caracter=='\n') {
-					numLineas--;
-				}System.out.print(caracter);
-				caracter=(char)entrada.read();
-				
-				
+			if (salida!=null) {
+				salida.close();
 				
 			}
-			
-			
-			
-		} catch (FileNotFoundException e) {
-			
-			
-			
-			
-			System.out.println(e.getMessage());
+			if(salida2!=null) {
+				salida2.close();
+			}
 		}
-		
-		
-		
-		
-		
+
 	}
+
 }
