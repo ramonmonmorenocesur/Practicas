@@ -13,6 +13,7 @@ import Animales.Animal;
 
 public class EjemploFicheros3 {
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
+
 		Animal gato;
 		Animal perro;
 		perro = new Animal("perro",32);
@@ -39,8 +40,9 @@ public class EjemploFicheros3 {
 			entrada= new ObjectInputStream(new BufferedInputStream(new FileInputStream("FicheroObjetos.txt")));
 			generico=(Animal)entrada.readObject();
 			System.out.println(generico.getNombre());
-			
-			
+			System.out.println(generico.getTpVida());
+			generico.setTpVida(16);
+			System.out.println(generico.getTpVida());;
 		} catch (FileNotFoundException e) {
 		System.out.println(e.getMessage());
 		
